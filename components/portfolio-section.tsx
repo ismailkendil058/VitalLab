@@ -10,15 +10,21 @@ interface Project {
   description: string
   tags: string[]
   color: string
+  url?: string
+  image?: string
+  modalImage?: string
 }
 
 const projects: Project[] = [
   {
-    title: "Lumiere Dental Care",
+    title: "NEDJMA dental clinic system",
     category: "Dentistry",
     description: "A full-scale rebrand and digital patient acquisition system that increased bookings by 145%.",
     tags: ["Authority Site", "Patient Portal", "SEO"],
     color: "bg-primary/[0.06]",
+    url: "https://clinic-nedjma.vercel.app/",
+    image: "/Screenshot 2026-02-24 022524.png",
+    modalImage: "/Screenshot 2026-02-24 022619.png",
   },
   {
     title: "Physio Bordeaux",
@@ -118,7 +124,15 @@ export function PortfolioSection() {
               className="group relative cursor-pointer flex flex-col overflow-hidden rounded-[2.5rem] border border-primary/5 bg-[#FBFBF9] p-2 transition-all duration-500 perspective-1000"
             >
               <div className={`${project.color} relative h-64 overflow-hidden rounded-[2rem] flex items-center justify-center`}>
-                <span className="text-6xl font-black text-foreground/5">{project.title.charAt(0)}</span>
+                {project.image ? (
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-6xl font-black text-foreground/5">{project.title.charAt(0)}</span>
+                )}
                 <div className="absolute bottom-4 left-4">
                   <span className="rounded-full bg-white/90 backdrop-blur-md px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-foreground">
                     {project.category}
@@ -189,8 +203,24 @@ export function PortfolioSection() {
               <div className="grid md:grid-cols-2">
                 <div className={`${selectedProject.color} h-64 md:h-auto flex items-center justify-center p-12`}>
                   <div className="text-center">
-                    <span className="text-8xl font-black text-foreground/5">{selectedProject.title.charAt(0)}</span>
-                    <p className="mt-4 font-bold text-primary">Visual Identity</p>
+                    {selectedProject.modalImage ? (
+                      <img 
+                        src={selectedProject.modalImage} 
+                        alt={selectedProject.title} 
+                        className="w-full h-auto rounded-2xl shadow-lg"
+                      />
+                    ) : selectedProject.image ? (
+                      <img 
+                        src={selectedProject.image} 
+                        alt={selectedProject.title} 
+                        className="w-full h-auto rounded-2xl shadow-lg"
+                      />
+                    ) : (
+                      <>
+                        <span className="text-8xl font-black text-foreground/5">{selectedProject.title.charAt(0)}</span>
+                        <p className="mt-4 font-bold text-primary">Visual Identity</p>
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="p-8 md:p-16">
@@ -211,9 +241,15 @@ export function PortfolioSection() {
                     </div>
                   </div>
 
-                  <button className="mt-12 w-full bg-primary text-white py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:shadow-xl transition-shadow">
-                    View Live Project <ExternalLink className="w-4 h-4" />
-                  </button>
+                  {selectedProject.url ? (
+                    <a href={selectedProject.url} target="_blank" rel="noopener noreferrer" className="mt-12 w-full bg-primary text-white py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:shadow-xl transition-shadow">
+                      View Live Project <ExternalLink className="w-4 h-4" />
+                    </a>
+                  ) : (
+                    <button className="mt-12 w-full bg-primary text-white py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:shadow-xl transition-shadow">
+                      View Live Project <ExternalLink className="w-4 h-4" />
+                    </button>
+                  )}
                 </div>
               </div>
             </motion.div>
