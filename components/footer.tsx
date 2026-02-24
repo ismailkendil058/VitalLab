@@ -121,7 +121,7 @@ export function Footer() {
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
           viewport={{ once: true }}
-          className="mt-20 pt-8 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-6"
+          className="mt-20 pt-8 border-t border-primary/5 flex flex-col md:flex-row justify-center items-center gap-6"
         >
           <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
             &copy; {new Date().getFullYear()} VitalLab Creative. Tous droits réservés.
